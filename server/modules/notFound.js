@@ -1,7 +1,7 @@
+import errorResponse from '../helpers/errorResponse';
+
 const notFound = (req, res) => {
-  res.status(404).json({
-    message: 'Oops! This route does not exist'
-  });
+  errorResponse('Oops! This route does not exist', 404, res);
 };
 
 export default notFound;
