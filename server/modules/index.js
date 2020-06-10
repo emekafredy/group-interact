@@ -1,10 +1,10 @@
 import userRouter from './user';
 
 const apiPrefix = '/api/v1';
-const routes = [ userRouter ];
+const routes = [userRouter];
 
 const modules = (app) => {
-  routes.forEach(route => app.use(apiPrefix, route));
+  routes.forEach((route) => app.use(apiPrefix, route));
 
   app.get('/', (req, res) => res.status(200).json({
     message: 'GROUP-INTERACTIVE',
