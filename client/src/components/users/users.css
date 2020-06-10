@@ -1,0 +1,21 @@
+h2 {
+  text-align: center;
+  margin: 3rem;
+  background-color: rgb(233, 229, 229);
+  padding: 5rem 0;
+  font-size: 3rem;
+  border-radius: 0.7rem;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+}
+
+li {
+  margin-top: 2rem;
+  border-bottom: 1px gray solid;
+  width: 30%;
+  margin: auto;
+  padding: 2rem 0;
+}
