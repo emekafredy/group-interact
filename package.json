@@ -10,7 +10,8 @@
     "build": "babel index.js -d dist",
     "server": "nodemon --exec babel-node ./",
     "client": "cd client && yarn start",
-    "dev": "concurrently \"yarn server\" \"yarn client\""
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "test": "jest --no-cache  --detectOpenHandles --runInBand --forceExit"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -28,6 +29,22 @@
     "babel-preset-env": "^1.7.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.21.2"
+    "eslint-plugin-import": "^2.21.2",
+    "jest": "^26.0.1",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "server/**/*.js"
+    ],
+    "testMatch": [
+      "<rootDir>/server/**/__tests__/**/?(*.)(spec|test)js",
+      "<rootDir>/server/**/?(*.)(spec|test).js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/server/database"
+    ],
+    "testEnvironment": "node"
   }
 }

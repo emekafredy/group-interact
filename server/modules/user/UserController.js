@@ -1,3 +1,5 @@
+import errorResponse from '../../helpers/errorResponse';
+
 class UserController {
   static async getUsers(req, res) {
     try {
@@ -12,8 +14,8 @@ class UserController {
         message: 'Users retrieved',
         users
       });
-    } catch (error) {
-      console.log(error, 500, res);
+    } catch (error) { /* istanbul ignore next */
+      return errorResponse(error, 500, res);
     }
   }
 }
