@@ -23,7 +23,6 @@ describe('Index api', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           const { message } = res.body;
-          expect(res.status).toEqual(200);
           expect(message).toEqual('Welcome to Group Interact app API, Version 1');
           if (err) return done(err);
           done();
@@ -33,10 +32,9 @@ describe('Index api', () => {
     it('should return 404 error for incorrect url', (done) => {
       request(app)
         .get('/api/v1/use')
-        .set('Content-Type', 'application/json')
         .end((err, res) => {
           const { error } = res.body;
-          // expect(success).toEqual(false);
+          expect(res.status).toEqual(404);
           expect(error).toEqual('Oops! This route does not exist');
           if (err) return done(err);
           done();
