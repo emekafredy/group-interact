@@ -1,12 +1,10 @@
 import Sequelize from 'sequelize';
+import config from '../config/config';
 
-// database, username, password and config
-const sequelize = new Sequelize('group-interact', 'emekachinedu', '', {
-  dialect: 'postgres',
-  define: {
-    underscored: true,
-  },
-});
+const  { database, username, password, env } = config.development;
+
+
+const sequelize = new Sequelize(database, username, password, env);
 
 const models = {
   User: sequelize.import('./user')

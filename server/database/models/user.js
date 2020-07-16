@@ -1,8 +1,13 @@
 export default (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
+  const User = sequelize.define('User', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     username: {
       type: DataTypes.STRING,
       unique: true,
+      allowNull: false,
       validate: {
         isAlphanumeric: {
           args: true,
@@ -17,6 +22,7 @@ export default (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       unique: true,
+      allowNull: false,
       validate: {
         isEmail: {
           args: true,
@@ -26,6 +32,7 @@ export default (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         len: {
           args: [5, 100],
@@ -36,4 +43,4 @@ export default (sequelize, DataTypes) => {
   });
 
   return User;
-};
+}

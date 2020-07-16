@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 const user = gql`
   type User {
     id: Int!
+    name: String!
     username: String!
     email: String!
   }
@@ -16,7 +17,7 @@ const user = gql`
   }
 
   type Mutation {
-    register(username: String!, email: String!, password: String!): AuthResponse!
+    register(name: String!, username: String!, email: String!, password: String!): AuthResponse!
   }
 `;
 

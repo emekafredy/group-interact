@@ -3,7 +3,11 @@ import { ApolloServer } from 'apollo-server-express';
 import typeDefs from '../typeDefinitions';
 import resolvers from '../resolvers';
 
-import models from '../../database/index';
+import models from '../../database/models';
+
+models.sequelize.sync({}).then(() => {
+  console.log('Database Migrated');
+});
 
 const graphqlEndpoint = 'http://localhost:8000/graphql';
 
