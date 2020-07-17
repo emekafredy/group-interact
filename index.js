@@ -1,10 +1,10 @@
 import express from 'express';
 import log from 'fancy-log';
-import dotenv from 'dotenv';
 
-import server from './server/graphql/schema/index';
+import server from './server/graphql/schema';
 
-dotenv.config();
+require('dotenv').config();
+
 const { PORT } = process.env;
 
 const app = express();

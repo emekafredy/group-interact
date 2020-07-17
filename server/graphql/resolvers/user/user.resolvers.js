@@ -1,21 +1,42 @@
+import { combineResolvers } from 'graphql-resolvers';
+
+import { loginUser, generateToken } from '../../../helpers/auth';
+import { checkAuth } from '../auth/auth.resolvers';
+import { formatErrors } from '../../../helpers/errorResponse';
+
 const userResolvers = {
   Query: {
-    getUser: async (_parent, { id }, { models }) => {
-        return models.User.findOne({ where: { id } })
-    }
+    getAllUsers: combineResolvers(
+      checkAuth,
+      async (_parent, _args, { models, user }) => models.User.findAll()
+    ),
+    getUser: combineResolvers(
+      checkAuth,
+      (_parent, { id }, { models }) => models.User.findOne({ where: { id } })
+    )
   },
   Mutation: {
-    register: async (parent, args, { models }) => {
+    register: async (_parent, { registerInput }, { models }) => {
       try {
-        const user = await models.User.create(args);
+        const user = await models.User.create(registerInput);
+        const token = await generateToken(user);
 
         return {
+          success: true,
+          token,
           user
         };
-      } catch (err) {
-        throw err;
+      } catch (err) {    
+        return {
+          success: false,
+          errors: formatErrors(err),
+        };
       }
     },
+    login: async (_parent, { loginInput }, { models }) => {
+      const authData = await loginUser(loginInput.email, loginInput.password, models);
+      return authData;
+    }
   }
 };
 
